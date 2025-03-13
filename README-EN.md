@@ -1,8 +1,9 @@
 # Ollama API Proxy User Guide
 
 ## Introduction
+Ollama lacks API key security authentication, which is a serious issue, but we don't want to build a complex HTTP server just for simple Ollama usage. Therefore, I've written a lightweight forwarding server using FastAPI. This is a very lightweight application, and if you need SQL database integration, you can also modify the configuration file to incorporate Python ORM frameworks like peewee to directly use database tables.
 
-Ollama API Proxy is a lightweight middleware designed to add API key authentication functionality to the native Ollama service. This project addresses the issue that Ollama's official implementation does not provide API key verification, allowing you to deploy Ollama services more securely and prevent unauthorized access.
+Ollama-serve as API Proxy is a lightweight middleware designed to add API key authentication functionality to the native Ollama service. This project addresses the issue that Ollama's official implementation does not provide API key verification, allowing you to deploy Ollama services more securely and prevent unauthorized access.
 
 ## Problems Solved
 
