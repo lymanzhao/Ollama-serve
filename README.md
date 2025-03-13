@@ -17,7 +17,7 @@ Ollama API 代理是一个轻量级中间件，用于为原生 Ollama 服务添�
 1. **API 密钥认证**：所有请求都需要有效的 API 密钥才能访问 Ollama 服务。
 2. **多用户支持**：支持多个 API 密钥，每个密钥关联到特定用户。
 3. **会话管理**：使用基于 IP 的信任系统，减少重复认证的需求。
-4. **LangChain**： LangChain 进验证可使用。
+4. **客户端**： LangChain等客户端验证可使用。
 5. **日志记录**：详细记录所有请求和响应，便于监控和排查问题。
 6. **流式响应支持**：完全支持 Ollama 的流式响应功能。
 7. **健康检查**：提供健康检查端点来监控代理服务和后端 Ollama 服务的状态。
@@ -78,7 +78,7 @@ curl -X POST "http://localhost:8000/api/chat" \
   -d '{"model": "qwen2.5:72b", "messages": [{"role": "user", "content": "你好"}], "stream": true}'
 ```
 
-### 2. 使用 LangChain 客户端
+### 2. 示例：使用客户端（ LangChain ）
 
 LangChain 客户端需要先调用 `/auth` 端点进行认证，然后再发送正常请求：
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
 | 端点 | 方法 | 描述 |
 |------|------|------|
 | `/` | GET | 返回 API 信息 |
-| `/auth` | POST | LangChain 客户端专用身份验证端点 |
+| `/auth` | POST | 客户端专用身份验证端点 |
 | `/health` | GET | 健康检查端点 |
 | `/{path}` | * | 代理所有 Ollama API 请求，需要 API 密钥 |
 
@@ -175,8 +175,8 @@ if __name__ == "__main__":
 2. **问题**：无法连接到 Ollama 服务
    **解决方案**：确保 Ollama 服务正在运行，并检查 `config.py` 中的 `OLLAMA_API_BASE_URL` 设置是否正确。
 
-3. **问题**：LangChain 客户端无法连接
-   **解决方案**：确保先调用 `/auth` 端点进行认证，然后再使用 LangChain 客户端发送请求。
+3. **问题**：客户端无法连接
+   **解决方案**：确保先调用 `/auth` 端点进行认证，然后再使用客户端发送请求。
 
 ## 总结
 
