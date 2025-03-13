@@ -16,7 +16,7 @@ Ollama-serve as API Proxy is a lightweight middleware designed to add API key au
 1. **API Key Authentication**: All requests require a valid API key to access the Ollama service.
 2. **Multi-user Support**: Supports multiple API keys, each associated with a specific user.
 3. **Session Management**: Uses an IP-based trust system to reduce the need for repeated authentication.
-4. **LangChain Integration**: Provides a friendly authentication mechanism specifically for LangChain clients.
+4. **Client Integration**: Provides a friendly authentication mechanism specifically for clients.
 5. **Logging**: Detailed logging of all requests and responses for monitoring and troubleshooting.
 6. **Streaming Response Support**: Fully supports Ollama's streaming response functionality.
 7. **Health Check**: Provides health check endpoints to monitor the status of both the proxy service and the backend Ollama service.
@@ -77,9 +77,9 @@ curl -X POST "http://localhost:8000/api/chat" \
   -d '{"model": "qwen2.5:72b", "messages": [{"role": "user", "content": "Hello"}], "stream": true}'
 ```
 
-### 2. Using LangChain Client
+### 2. Using Client（LangChain）
 
-LangChain clients need to call the `/auth` endpoint first for authentication, then send normal requests:
+Clients need to call the `/auth` endpoint first for authentication, then send normal requests:
 
 ```python
 from langchain_ollama import ChatOllama
@@ -143,7 +143,7 @@ if __name__ == "__main__":
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/` | GET | Returns API information |
-| `/auth` | POST | Authentication endpoint specifically for LangChain clients |
+| `/auth` | POST | Authentication endpoint specifically for clients |
 | `/health` | GET | Health check endpoint |
 | `/{path}` | * | Proxies all Ollama API requests, requires API key |
 
@@ -174,8 +174,8 @@ The proxy service logs all requests and responses in detail, with the following 
 2. **Issue**: Cannot connect to Ollama service
    **Solution**: Ensure the Ollama service is running and verify that the `OLLAMA_API_BASE_URL` setting in `config.py` is correct.
 
-3. **Issue**: LangChain client cannot connect
-   **Solution**: Make sure to call the `/auth` endpoint for authentication first, then use the LangChain client to send requests.
+3. **Issue**: client cannot connect
+   **Solution**: Make sure to call the `/auth` endpoint for authentication first, then use the client to send requests.
 
 ## Summary
 
