@@ -205,12 +205,6 @@ async def proxy_ollama(path: str, request: Request):
     if not api_key and isinstance(body_obj, dict) and "api_key" in body_obj:
         api_key = body_obj["api_key"]
         api_key_source = "JSON请求体"
-        
-        # 从请求体中移除API密钥
-        body_copy = body_obj.copy()
-        body_copy.pop("api_key")
-        # 更新请求体
-        modified_body = json.dumps(body_copy).encode()
     
     # 验证API密钥
     if not api_key:
@@ -425,4 +419,5 @@ if __name__ == "__main__":
     import uvicorn
     logger.info(f"启动Ollama代理服务器在端口8401，转发到{OLLAMA_API_BASE_URL}")
     logger.info(f"有效的API密钥数量: {len(VALID_API_KEYS)}")
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
